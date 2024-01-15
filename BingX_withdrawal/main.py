@@ -57,7 +57,7 @@ def bingx_withdraw(address):
     try:
         while True:
             responce = exchange.fetch_deposit_withdraw_fee('MEME')
-            fee = int(float(responce['info']['networkList'][0]['withdrawFee']))+1
+            fee = float(responce['info']['networkList'][0]['withdrawFee'])
             if fee < need_fee:
                 logger.info(f"Fee - {fee} Работаем")
                 break
