@@ -10,7 +10,7 @@ from tqdm import trange
 shuffle = False                                                     # True / False. если нужно перемешать кошельки
 delay_wallets = [10, 20]                                            # минимальная и максимальная задержка между кошельками
 need_fee = 200                                                      # максимальная комиссия в MEME
-amount_for_withdrawal = random.randint(269, 270)                    # кол-во MEME для вывода с учетом комиссии!!!
+amount_MEME_for_withdrawal = [269, 270]                             # кол-во MEME для вывода с учетом комиссии!!!
 time_sleep = 180                                                    # время через которое проверяет комиссию
 
 # BingX API
@@ -64,6 +64,8 @@ def bingx_withdraw(address):
             logger.info(f"Fee - {fee} Ушел спать на {time_sleep} сек...")
             time.sleep(time_sleep)
 
+        amount_for_withdrawal = random.randint(amount_MEME_for_withdrawal[0], amount_MEME_for_withdrawal[1])
+        
         exchange.withdraw(
             code='MEME',
             amount=amount_for_withdrawal,
@@ -73,7 +75,7 @@ def bingx_withdraw(address):
                 "network": 'ERC20'
             }
         )
-        logger.success(f'Вывел {amount} MEME ')
+        logger.success(f'Вывел {amount_for_withdrawal} MEME ')
 
     except Exception as error:
         logger.error(f' {error}')
